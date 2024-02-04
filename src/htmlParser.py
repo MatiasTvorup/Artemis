@@ -9,3 +9,4 @@ class HtmlParser:
 
     def parse(self):
         pass
+
