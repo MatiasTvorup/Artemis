@@ -12,7 +12,10 @@ class Scraper:
     def scrape(self) -> str:
         print("SCRAPING " + self.__url__)
 
-        driver = webdriver.Firefox()
+
+        opt = webdriver.FirefoxOptions()
+        opt.add_argument("--headless")
+        driver = webdriver.Firefox(options=opt)
         driver.get(self.__url__)
         page_source = driver.page_source
         driver.quit()
