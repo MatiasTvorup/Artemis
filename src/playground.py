@@ -1,6 +1,5 @@
-from selenium import webdriver
+from scraper import Scraper
 
-driver = webdriver.Firefox()# Open a web page
-driver.get("https://python.org")
-print(driver.title)
-driver.quit()
+
+s = Scraper("https://www.dr.dk/")
+s.scrape()
