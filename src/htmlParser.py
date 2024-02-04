@@ -1,4 +1,4 @@
-
+from bs4 import BeautifulSoup
 
 class HtmlParser:
     __htmlContent__ = ""
