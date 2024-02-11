@@ -1,22 +1,15 @@
 from selenium import webdriver
 
 class Scraper:
-    __url__ = ""
 
-    def __init__(self, url : str):
-        self.__url__ = url
-
-    def setUrl(self, url : str):
-        self.__url__ = url
-
-    def scrape(self) -> str:
-        print("SCRAPING " + self.__url__)
-
-
+    def __init__(self):
         opt = webdriver.FirefoxOptions()
         opt.add_argument("--headless")
-        driver = webdriver.Firefox(options=opt)
-        driver.get(self.__url__)
-        page_source = driver.page_source
-        driver.quit()
+        self.driver = webdriver.Firefox(options=opt)
+
+
+    def scrape(self, url : str) -> str:
+        self.driver.get(url)
+        page_source = self.driver.page_source
+        self.driver.quit()
         return page_source

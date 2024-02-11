@@ -1,5 +1,5 @@
 from scraper import Scraper
 
 
-s = Scraper("https://www.dr.dk/")
-print(s.scrape())
+s = Scraper()
+print(s.scrape("https://www.dr.dk/"))
