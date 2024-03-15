@@ -6,6 +6,8 @@ class Bet:
     team1WinOdds = 0
     team2WinOdds = 0
 
+    startTime = ""
+
 
     def __init__(self, team1 : str, team2 : str, t1Odds : float, t2Odds : float):
         self.team1Name = team1
@@ -13,8 +15,13 @@ class Bet:
         self.team1WinOdds = t1Odds
         self.team2WinOdds = t2Odds
 
-    def __str__(self):
-        return self.team1Name + ": " + str(self.team1WinOdds) + "\n" + self.team2Name + ": " + str(self.team2WinOdds)
+    def print(self):
+        print("---")
+        print(self.team1Name + ": " + self.team1WinOdds)
+        print(self.team2Name + ": " + self.team2WinOdds)
+        if self.startTime != "":
+            print("Start time: " + self.startTime)
+        print("---")
         
 
     def isInitialized(self):

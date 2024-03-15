@@ -1,9 +1,11 @@
 from scraper import Scraper
-from htmlParser import HtmlParser
+from htmlParser import OddsetParser
+from htmlParser import NordicBetParser
 
 
 s = Scraper()
-h = HtmlParser()
-h.parse(s.scrape("https://danskespil.dk/oddset/sport/783/dart/matches", "EventItemLinkAnchor-0-3-635"))
-# f = open("src/test.html", "r")
-# h.parse(f.read())
+op = OddsetParser()
+np = NordicBetParser()
+
+np.parse(s.scrape("https://www.nordicbet.dk/betting/dart/international", "obg-event-info-participant-name"))
+# op.parse(s.scrape("https://danskespil.dk/oddset/sport/783/dart/matches", "EventItemLinkAnchor-0-3-635"))
