@@ -25,16 +25,16 @@ class OddsetParser:
                 continue
             
             b = Bet(teams[0].contents[0], teams[1].contents[0], odds[0].contents[0], odds[1].contents[0])
+            b.source = "Oddset"
 
             time = soup.find_all('span', class_=re.compile('eventCardEventStartTimeText'))
             if len(time) == 1:
                 b.startTime = time[0].contents[0]
             
             if b.isInitialized():
+                b.source = "Oddset"
                 betList.append(b)
 
-        for b in betList:
-            b.print()
         return betList
 
 class NordicBetParser:
@@ -42,12 +42,12 @@ class NordicBetParser:
         betList = []
 
         soup = BeautifulSoup(html, "html.parser")
-        games = soup.find_all('div', class_= re.compile('obg-event-row-event-container'))
+        games = soup.find_all('div', class_= re.compile('obg-event-row-event'))
 
         for game in games:
             soup = BeautifulSoup(str(game), "html.parser")
 
-            teams = soup.find_all('span', class_=re.compile('obg-event-info-participant-name'))
+            teams = soup.find_all('span', class_=re.compile('obg-event-info-participants-name'))
             if len(teams) != 2:
                 continue
             
@@ -59,7 +59,7 @@ class NordicBetParser:
             odds = []
             for container in oddsContainers:
                 oddSoup = BeautifulSoup(str(container), "html.parser")
-                tempOdds = oddSoup.find_all('span', class_=re.compile('ng-star-inserted'))
+                tempOdds = oddSoup.find_all('span', class_=re.compile('obg-numeric-change-container-odds-value'))
                 for odd in tempOdds:
                     odds.append(odd)
 
@@ -67,7 +67,9 @@ class NordicBetParser:
                 continue
 
             b = Bet(teams[0].contents[0], teams[1].contents[0], odds[0].contents[0], odds[1].contents[0])
-            if b.isInitialized():
+            b.source = "NordicBet"
+            alreadyExists = not b in betList
+            if b.isInitialized() and alreadyExists:
                 betList.append(b)
 
         return betList

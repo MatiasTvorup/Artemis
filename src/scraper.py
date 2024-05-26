@@ -11,9 +11,8 @@ class Scraper:
         self.driver = webdriver.Firefox(options=opt)
 
 
-    def scrape(self, url : str, pageLoadedClass : str) -> str:
+    def scrape(self, url : str, pageLoadedIndicator : str) -> str:
         self.driver.get(url)
-        WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located((By.CLASS_NAME, pageLoadedClass)))
+        WebDriverWait(self.driver, 30).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "div[class^='" + pageLoadedIndicator + "']")))
         page_source = self.driver.page_source
-        # self.driver.quit()
         return page_source
