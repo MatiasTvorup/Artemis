@@ -24,7 +24,7 @@ class OddsetParser:
             if len(odds) != 2:
                 continue
             
-            b = Bet(teams[0].contents[0], teams[1].contents[0], odds[0].contents[0], odds[1].contents[0])
+            b = Bet(teams[0].contents[0], teams[1].contents[0], float(odds[0].contents[0]), float(odds[1].contents[0]))
             b.source = "Oddset"
 
             time = soup.find_all('span', class_=re.compile('eventCardEventStartTimeText'))
@@ -66,7 +66,7 @@ class NordicBetParser:
             if len(odds) != 2:
                 continue
 
-            b = Bet(teams[0].contents[0], teams[1].contents[0], odds[0].contents[0], odds[1].contents[0])
+            b = Bet(teams[0].contents[0], teams[1].contents[0], float(odds[0].contents[0]), float(odds[1].contents[0]))
             b.source = "NordicBet"
             alreadyExists = not b in betList
             if b.isInitialized() and alreadyExists:

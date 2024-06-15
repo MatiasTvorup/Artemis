@@ -15,8 +15,8 @@ nordic = np.parse(s.scrape("https://www.nordicbet.dk/betting/dart/international"
 bm = BetMatcher()
 list = bm.MatchBets(nordic, odd)
 
-for l in list:
-    print("***")
-    l.b1.print()
-    l.b2.print()
-    print("***")
+for m in list:
+    print(m.b1)
+    print(m.b2)
+if(list.count() == 0):
+    print("LIst is empty")
